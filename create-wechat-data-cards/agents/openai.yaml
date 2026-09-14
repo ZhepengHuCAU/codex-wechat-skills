@@ -1,0 +1,9 @@
+interface:
+  display_name: "公众号数据卡片"
+  short_description: "将可信数据生成专业、统一品牌且适合手机阅读的公众号图卡"
+  icon_small: "./assets/ag-commodity-logo-transparent.png"
+  icon_large: "./assets/ag-commodity-logo-transparent.png"
+  brand_color: "#0B5A38"
+  default_prompt: "Use $create-wechat-data-cards to turn verified market data into a branded Chinese WeChat data card."
+policy:
+  allow_implicit_invocation: true
