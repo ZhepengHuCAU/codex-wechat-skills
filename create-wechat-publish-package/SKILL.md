@@ -16,9 +16,10 @@ Turn the final article and ordered images into a publication-ready folder withou
 5. Generate an answer-first title, a concise digest, and two alternative titles. Do not repeat the article title inside the body unless the user requests it.
 6. Run [build_publish_package.py](scripts/build_publish_package.py) or adapt it for the document’s structure.
 7. Verify that every source image is embedded or copied and referenced exactly once in the HTML and Markdown.
-8. Open the HTML locally and inspect both desktop and narrow mobile widths. Check the first screen for excess blank space.
-9. Validate the manifest, ZIP, hashes, image dimensions, and file count.
-10. If requested, open the final HTML in the in-app browser. Do not publish or mass-send unless the user explicitly authorizes that separate action.
+8. Check WeChat compatibility risks before preview: no unitless `line-height`, no horizontally scrolling wide tables, no `min-width`/`overflow-x` layout that can exceed the screen, and no body text with line height smaller than its font size.
+9. Open the HTML locally and inspect both desktop and narrow mobile widths. Check the first screen for excess blank space and confirm there is no horizontal overflow.
+10. Validate the manifest, ZIP, hashes, image dimensions, and file count.
+11. If requested, open the final HTML in the in-app browser. Do not publish or mass-send unless the user explicitly authorizes that separate action.
 
 ## Editorial Rules
 
@@ -36,7 +37,8 @@ Turn the final article and ordered images into a publication-ready folder withou
 - Use inline styles for all article content because the WeChat editor may remove head-level CSS.
 - For a no-whitespace copyable HTML requested by the user, set both preview and article containers to `width:100%;max-width:none;margin:0;padding:0`. Do not add desktop or mobile side padding.
 - Set the first body element’s top margin to zero. Do not include a large preview-page top padding that gets copied into WeChat.
-- Use 16–17 px body text, about 1.85–1.95 line height, dark gray text, and 21–22 px section headings with a gold left rule.
+- Use explicit pixel line heights rather than unitless ratios because the WeChat editor/plugin checker can misread ratio values as too small. Prefer 16–17 px body text with 30–32 px line height, 21–22 px section headings with about 30–32 px line height, and 13 px source notes with about 23 px line height.
+- Do not render comparison tables as wide HTML tables with `min-width`, `overflow-x`, or horizontal scrolling unless the user explicitly requires a true table. For mobile WeChat articles, convert small comparison tables into stacked cards or vertical key-value blocks that stay within `width:100%;max-width:100%;box-sizing:border-box`.
 - Use `width:100%;height:auto;display:block` for article cards.
 - Keep image paths relative and package the original images separately. Browser copy/paste may not transfer local images; the README must instruct the editor to upload the numbered images manually when needed.
 - Do not use scripts, external stylesheets, iframes, data URIs, or unsupported interactive elements.
@@ -72,5 +74,7 @@ The metadata JSON must include title, author, digest, source URL when available,
 - Confirm no image is present only in the DOCX media folder but absent from the article body.
 - Confirm HTML, Markdown, text, metadata, README, and manifest describe the same title and image count.
 - Confirm all files use UTF-8 and Chinese characters are not garbled.
+- Confirm inline CSS uses pixel `line-height` values, not unitless ratios, percentages, or values smaller than the font size.
+- Confirm the rendered mobile preview has `documentElement.scrollWidth <= viewport width` and no visible element protrudes beyond the viewport.
 - Confirm the ZIP expands to one package root and contains every manifest entry.
 - Report that saving to a draft, publishing, and mass-sending were not performed unless separately requested.
