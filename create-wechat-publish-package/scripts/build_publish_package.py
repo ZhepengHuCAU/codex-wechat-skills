@@ -14,19 +14,19 @@ from docx.oxml.ns import qn
 from PIL import Image
 
 BODY_STYLE = (
-    "margin:0 0 18px 0;line-height:1.9;font-size:16px;color:#262626;"
+    "margin:0 0 18px 0;line-height:31px;font-size:16px;color:#262626;"
     "font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;"
     "text-align:justify;letter-spacing:.02em;"
 )
 HEADING_STYLE = (
     "margin:30px 0 18px 0;padding-left:12px;border-left:4px solid #D18A00;"
-    "line-height:1.45;font-size:21px;font-weight:700;color:#0B4A2F;"
+    "line-height:30px;font-size:21px;font-weight:700;color:#0B4A2F;"
     "font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;"
 )
 IMAGE_STYLE = "display:block;width:100%;height:auto;margin:24px auto 28px auto;"
 NOTE_STYLE = (
     "margin:30px 0 0;padding:14px 16px;background:#F6F3EC;border-radius:8px;"
-    "line-height:1.75;font-size:13px;color:#777;"
+    "line-height:23px;font-size:13px;color:#777;"
     "font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;"
 )
 
@@ -38,7 +38,7 @@ def write_text(path: Path, value: str) -> None:
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+        for chunk in iter(lambda: handle.read(1024 * 1024), b=""):
             digest.update(chunk)
     return digest.hexdigest()
 
