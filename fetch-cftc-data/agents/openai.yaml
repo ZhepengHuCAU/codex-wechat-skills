@@ -1,0 +1,4 @@
+interface:
+  display_name: "CFTC持仓数据下载"
+  short_description: "下载CFTC管理基金历史周度持仓，导出数据并核验历史同期排名"
+  default_prompt: "使用 $fetch-cftc-data 下载大豆和玉米管理基金仅期货历史持仓，导出CSV及原始数据，并核验最新一期的历史同期排名。"
